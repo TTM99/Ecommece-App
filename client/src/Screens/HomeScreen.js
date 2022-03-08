@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import logger from "use-reducer-logger";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -16,11 +17,14 @@ const reducer = (state, action) => {
 };
 
 const HomeScreen = () => {
-  const [{ loading, error, productData }, dispatch] = useReducer(reducer, {
-    productData: [],
-    loading: true,
-    error: "",
-  });
+  const [{ loading, error, productData }, dispatch] = useReducer(
+    logger(reducer),
+    {
+      productData: [],
+      loading: true,
+      error: "",
+    }
+  );
 
   // const [productData, setProductData] = useState([]);
 
@@ -46,6 +50,8 @@ const HomeScreen = () => {
       <h1>Featured Products</h1>
       {loading ? (
         <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
       ) : productData ? (
         <div className="products">
           {productData.map((product) => (
