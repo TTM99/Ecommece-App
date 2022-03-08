@@ -10,10 +10,19 @@ main {
   flex: 1;
 }
 
+.btn-primary {
+  background-color: #f0c040;
+  color: #000000;
+}
+
 header a {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
+}
+
+.rating span {
+  color: #ffc000;
 }
 
 .products {
