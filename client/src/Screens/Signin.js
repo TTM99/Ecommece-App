@@ -2,8 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { Store } from "../Store";
+import { getError } from "../utils";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const Signin = () => {
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       navigate(redirect || "/");
     } catch (err) {
-      alert("Invalid email or password");
+      toast.error(getError(err));
     }
   };
 

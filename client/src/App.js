@@ -5,8 +5,11 @@ import ProductScreen from "./Screens/ProductScreen";
 import { Navbar, Container, Nav, Badge, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Store } from "./Store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CartScreen from "./Screens/CartScreen";
 import Signin from "./Screens/Signin";
+import ShippingAddress from "./Screens/ShippingAddress";
 
 const App = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -19,6 +22,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
+        <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar bg="dark" variant="dark">
             <Container>
@@ -71,6 +75,7 @@ const App = () => {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<Signin />} />
+              <Route path="/shipping" element={<ShippingAddress />} />
             </Routes>
           </Container>
         </main>

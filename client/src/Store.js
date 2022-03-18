@@ -9,6 +9,9 @@ const initialState = {
       : null,
   },
   cart: {
+    shippingAddress: localStorage.getItem("shippingAddress")
+      ? JSON.parse(localStorage.getItem("shippingAddress"))
+      : {},
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
@@ -49,7 +52,36 @@ const reducer = (state, action) => {
     }
     case "USER_SIGNOUT": {
       localStorage.removeItem("userInfo");
-      return { ...state, user: { ...state.user, userInfo: null } };
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("shippingAddress");
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          userInfo: null,
+        },
+        cart: {
+          cartItems: [],
+          shippingAddress: {},
+        },
+      };
+    }
+    case "SAVE_SHIPPING_ADDRESS": {
+      const { fullName, address, city, postalCode, country } = action.payload;
+      localStorage.setItem(
+        "shippingAddress",
+        JSON.stringify({
+          fullName,
+          address,
+          city,
+          postalCode,
+          country,
+        })
+      );
+      return {
+        ...state,
+        cart: { ...state.cart, shippingAdress: action.payload },
+      };
     }
     default:
       return state;
