@@ -45,7 +45,11 @@ const reducer = (state, action) => {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "CART_CLEAR":
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     case "USER_SIGNIN": {
+      //{} are added so that it does not
+      // get confused with the variable names used in other cases
       const userInformation = action.payload;
       localStorage.setItem("userInfo", JSON.stringify(userInformation));
       return { ...state, user: { ...state.user, userInfo: action.payload } };
@@ -83,6 +87,12 @@ const reducer = (state, action) => {
         cart: { ...state.cart, shippingAdress: action.payload },
       };
     }
+    case "SAVE_PAYMENT_METHOD":
+      localStorage.setItem("paymentMethod", action.payload);
+      return {
+        ...state,
+        cart: { ...state.cart, paymentMethod: action.payload },
+      };
     default:
       return state;
   }

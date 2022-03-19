@@ -38,7 +38,7 @@ const ShippingAddress = () => {
         country,
       },
     });
-    navigate("/payment");
+    navigate("/paymentMethod");
   };
   return (
     <div>
