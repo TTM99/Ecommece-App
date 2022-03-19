@@ -7,7 +7,7 @@ import axios from "axios";
 import { Store } from "../Store";
 import { getError } from "../utils";
 
-const Signin = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
@@ -27,8 +27,15 @@ const Signin = () => {
     // prevents refreshing of the page when the user
     // clicks on the signin button
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Password do not match");
+      return; // does not continue the code after this
+      // if the condition is matched
+      // no need to write else by using return
+    }
     try {
-      const { data } = await axios.post("/api/users/signin", {
+      const { data } = await axios.post("/api/users/signup", {
+        name,
         email,
         password,
       });
@@ -76,6 +83,14 @@ const Signin = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="confirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </Form.Group>
         <div className="mb-3">
           <Button type="submit">Sign Up</Button>
         </div>
@@ -88,4 +103,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Signup;
