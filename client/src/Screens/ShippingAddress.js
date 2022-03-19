@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../Store";
-// import CheckoutSteps from "../components/CheckoutSteps";
+import CheckoutSteps from "./components/CheckoutSteps";
 
 const ShippingAddress = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const ShippingAddress = () => {
         <title>Shipping Address</title>
       </Helmet>
 
-      {/* <CheckoutSteps step1 step2></CheckoutSteps> */}
+      <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="container small-container">
         <h1 className="my-3">Shipping Address</h1>
         <Form onSubmit={submitHandler}>

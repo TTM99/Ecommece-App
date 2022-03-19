@@ -30,4 +30,11 @@ userRouter.post(
   })
 );
 
+userRouter.post(
+  "/",
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+  })
+);
+
 export default userRouter;
