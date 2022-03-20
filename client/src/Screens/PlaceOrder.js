@@ -147,6 +147,9 @@ const PlaceOrder = () => {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
+                    {/* The toFixed() method formats a number using fixed-point
+                    notation. */}
+                    {/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed */}
                     <Col>${cart.itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
