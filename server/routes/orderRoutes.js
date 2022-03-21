@@ -1,11 +1,11 @@
 import express from "express";
-import User from "../models/userModel.js";
+import Order from "../models/orderModel.js";
 import expressAsyncHandler from "express-async-handler";
-import { generateToken } from "../utils.js";
+import { isAuth } from "../utils.js";
 
-const userRouter = express.Router();
+const orderRouter = express.Router();
 
-userRouter.post(
+orderRouter.post(
   "/",
   isAuth,
   expressAsyncHandler(async (req, res) => {
@@ -22,6 +22,19 @@ userRouter.post(
 
     const order = await newOrder.save();
     res.status(201).send({ message: "New Order Created", order });
+  })
+);
+
+orderRouter.get(
+  "/:id",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      res.send(order);
+    } else {
+      res.status(404).send({ message: "Order Not Found" });
+    }
   })
 );
 
