@@ -32,6 +32,10 @@ app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 
+app.get("/api/keys/paypal", (req, res) => {
+  res.json(process.env.PAYPAL_CLIENT_ID || "sb"); // sb stands for sandbox
+});
+
 //middleware
 
 //express async handler
