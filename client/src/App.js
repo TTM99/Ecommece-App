@@ -15,6 +15,7 @@ import PaymentMethod from "./Screens/PaymentMethod";
 import PlaceOrder from "./Screens/PlaceOrder";
 import OrderScreen from "./Screens/OrderScreen";
 import OrderHistory from "./Screens/OrderHistory";
+import ProfileScreen from "./Screens/ProfileScreen";
 
 const App = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -25,6 +26,7 @@ const App = () => {
 
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
+    window.location.href = "/signin";
   };
 
   return (
@@ -89,6 +91,7 @@ const App = () => {
               <Route path="/shipping" element={<ShippingAddress />} />
               <Route path="/order/:id" element={<OrderScreen />} />
               <Route path="/orderHistory" element={<OrderHistory />} />
+              <Route path="/profile" element={<ProfileScreen />} />
             </Routes>
           </Container>
         </main>
