@@ -25,6 +25,20 @@ orderRouter.post(
   })
 );
 
+// route with /mine is kept top of /:id because if route /:id
+// is kept on top of route /mine then the api/mine will also be
+// handled by route /:id becasue it takes dynamic value
+
+orderRouter.get(
+  "/mine",
+  isAuth,
+  // isAuthUser,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user._id });
+    res.json(orders);
+  })
+);
+
 orderRouter.get(
   "/:id",
   isAuth,
