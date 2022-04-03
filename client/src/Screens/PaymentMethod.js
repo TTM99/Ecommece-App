@@ -9,6 +9,7 @@ const PaymentMethod = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
+    user: { userInfo },
     cart: { shippingAddress, paymentMethod },
   } = state;
 
@@ -19,8 +20,11 @@ const PaymentMethod = () => {
   useEffect(() => {
     if (!shippingAddress.address) {
       navigate("/shipping");
+      console.log(shippingAddress.address);
     }
-  }, [shippingAddress, navigate]);
+    console.log(shippingAddress.address);
+  }, [shippingAddress, navigate, userInfo]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({ type: "SAVE_PAYMENT_METHOD", payload: paymentMethodName });

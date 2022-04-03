@@ -39,6 +39,7 @@ const ShippingAddress = () => {
       },
     });
     navigate("/paymentMethod");
+    console.log("asdsd");
   };
   return (
     <div>
